@@ -1,0 +1,2 @@
+class UserChampsController < ApplicationController
+end

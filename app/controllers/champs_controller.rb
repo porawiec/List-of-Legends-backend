@@ -1,0 +1,2 @@
+class ChampsController < ApplicationController
+end
