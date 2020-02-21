@@ -14,9 +14,9 @@ Wish.destroy_all
 UserChamp.destroy_all
 # Friendship.destroy_all
 
-user_a = User.create(username: "usera", password_digest: "a")
-user_b = User.create(username: "userb", password_digest: "b")
-user_c = User.create(username: "userc", password_digest: "c")
+user_a = User.create(username: "usera", password: "a")
+user_b = User.create(username: "userb", password: "b")
+user_c = User.create(username: "userc", password: "c")
 
 all_league_text = RestClient.get("http://ddragon.leagueoflegends.com/cdn/10.3.1/data/en_US/champion.json")
 all_league_info = JSON.parse(all_league_text)
