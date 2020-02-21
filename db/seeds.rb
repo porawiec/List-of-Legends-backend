@@ -42,23 +42,33 @@ end
 
 # champ_json = arr_champs.map do |champ|
 champ_json = all_champ_info.map do |champion, info|
+    url_ready_name = info["name"].split.join
+    
     champ_find = Champ.find_by(name: "#{info["name"]}")
 
-    url_ready_name = info["name"].split.join
-
-    champ_text = RestClient.get("http://ddragon.leagueoflegends.com/cdn/10.3.1/data/en_US/champion/#{url_ready_name}.json")
+    champ_text = RestClient.get("http://ddragon.leagueoflegends.com/cdn/10.3.1/data/en_US/champion/#{champion}.json")
     champ_info = JSON.parse(champ_text)
 
-    all_champ_info = champ_info["data"]["#{info["name"]}"]["skins"]
+    all_champ_info = champ_info["data"]["#{champion}"]["skins"]
 
     champ_skins = all_champ_info.map do |skin|
         # skins["name"]
-        chimp = Champ.find_by(name: "#{info["name"]}")
+        dbChamp = Champ.find_by(name: "#{info["name"]}")
+        # p champion
+        # p skin["name"]
+        # p "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/#{champion}_#{skin["num"]}.jpg"
+        # p "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/#{champion}_#{skin["num"]}.jpg" 
+        # p chimp
+
         skin = Skin.create(
             name: skin["name"], 
-            splash_img: "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/#{url_ready_name}_#{skin["num"]}.jpg", 
-            loading_img: "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/#{url_ready_name}_#{skin["num"]}.jpg", 
-            champ: champ_find
+            splash_img: "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/#{champion}_#{skin["num"]}.jpg", 
+            loading_img: "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/#{champion}_#{skin["num"]}.jpg", 
+            champ: dbChamp
         )
     end
+    p "`````````````````"
+    p all_champ_info
+    p "`````````````````"
+    
 end
