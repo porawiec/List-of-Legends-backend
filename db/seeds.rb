@@ -72,3 +72,10 @@ champ_json = all_champ_info.map do |champion, info|
     p "`````````````````"
     
 end
+
+50.times do
+    Wish.create(
+        user: User.all.sample,
+        skin: Skin.all.sample
+    )
+end
