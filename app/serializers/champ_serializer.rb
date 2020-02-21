@@ -1,3 +1,3 @@
 class ChampSerializer < ActiveModel::Serializer
-  attributes :id, :name, :icon_img
+  attributes :id, :name, :icon_img, :skins
 end

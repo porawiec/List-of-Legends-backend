@@ -1,4 +1,6 @@
 class ChampsController < ApplicationController
-    @champs = Champ.all
-    render json: @champs, include: [:skins]
+    def index
+        @champs = Champ.all
+        render json: @champs
+    end
 end
