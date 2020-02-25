@@ -5,4 +5,5 @@ class User < ApplicationRecord
     has_many :champs, through: :user_champs
 
     has_secure_password
+    validates :username, uniqueness: { case_sensitive: false }
 end
