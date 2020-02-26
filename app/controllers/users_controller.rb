@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
     def profile
         render json: { user: UserSerializer.new(current_user) }, status: :accepted
-      end
+    end
 
     def create
         @user = User.create(user_params)
@@ -13,6 +13,11 @@ class UsersController < ApplicationController
         else
           render json: { error: 'failed to create user' }, status: :not_acceptable
         end
+    end
+
+    def index
+      @users = User.all
+      render json: @users
     end
      
     private
