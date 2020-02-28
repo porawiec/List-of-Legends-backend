@@ -12,7 +12,11 @@ class WishesController < ApplicationController
     end
 
     def destroy
-        Wish.find(user_id: params[:user_id], skin_id: params[:skin_id]).destroy
+        Wish.find(params[:id]).destroy
+    end
+
+    def destroyWithIds
+        Wish.find_by(user_id: params[:user_id], skin_id: params[:skin_id]).destroy
     end
 
     def wish_params
