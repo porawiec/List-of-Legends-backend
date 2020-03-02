@@ -1,10 +1,8 @@
 class WishesController < ApplicationController
 
     def create
-        @wish = Wish.create(wish_params)
-
+        @wish = Wish.new(wish_params)
         if @wish.save
-            @wish.save
             render json: { wish: @wish }
         else
             render json: { error: 'failed to create wish' }

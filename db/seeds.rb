@@ -12,11 +12,19 @@ Skin.destroy_all
 
 Wish.destroy_all
 UserChamp.destroy_all
-# Friendship.destroy_all
+Friendship.destroy_all
 
 user_a = User.create(username: "usera", password: "a")
 user_b = User.create(username: "userb", password: "b")
 user_c = User.create(username: "userc", password: "c")
+
+Friendship.create(user: User.find_by(username: "usera"), friend: User.find_by(username: "userb"))
+Friendship.create(user: User.find_by(username: "usera"), friend: User.find_by(username: "userc"))
+Friendship.create(user: User.find_by(username: "userb"), friend: User.find_by(username: "usera"))
+
+
+
+# fri_ab = Friendship.create(user: user_a)
 
 all_league_text = RestClient.get("http://ddragon.leagueoflegends.com/cdn/10.3.1/data/en_US/champion.json")
 all_league_info = JSON.parse(all_league_text)
