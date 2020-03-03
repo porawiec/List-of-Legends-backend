@@ -1,7 +1,9 @@
 class FriendshipsController < ApplicationController
 
     def create
-        @friendship = Friendship.new(friendship_params)
+        console.log(params)
+        @friendship = Friendship.new(user_id: params[:user_id], friend_id: User.find_by(username: params[:friendUsername])).build
+        # @friendship = Friendship.new(friendship_params)
 
         if @friendship.save
             render json: { friendship: @friendship }

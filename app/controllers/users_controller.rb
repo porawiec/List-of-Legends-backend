@@ -15,6 +15,11 @@ class UsersController < ApplicationController
         end
     end
 
+    def show
+      friend = User.find(params[:id])
+      render json: friend
+    end
+
     def index
       @users = User.all
       render json: @users

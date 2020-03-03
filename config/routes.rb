@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :skins
   resources :champs
 
-  resources :users, only: [:create, :index]
+  resources :users, only: [:create, :index, :show]
   post '/login', to: 'auth#create'
   get '/profile', to: 'users#profile'
   delete '/destroyWithIds', to: 'wishes#destroyWithIds'
