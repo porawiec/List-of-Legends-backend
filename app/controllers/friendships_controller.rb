@@ -2,7 +2,7 @@ class FriendshipsController < ApplicationController
 
     def create
         console.log(params)
-        @friendship = Friendship.new(user_id: params[:user_id], friend_id: User.find_by(username: params[:friendUsername])).build
+        @friendship = Friendship.find_by(user_id: params[:user_id], friend_id: params[:friend_id]).build
         # @friendship = Friendship.new(friendship_params)
 
         if @friendship.save
@@ -16,15 +16,17 @@ class FriendshipsController < ApplicationController
         Friendship.find(params[:id]).destroy
     end
 
-    def createWithIds
-        @friendship = Friendship.find_by(user_id: params[:user_id], friend_id: params[:friend_id]).build
+    def createFriendWithName
+        @friend = User.find_by(username: params[:friendUsername])
+        @friendship = Friendship.new(user_id: params[:user_id], friend: @friend)
         if @friendship.save
-            render json: { friendship: @friendship }
+            render json: { friend: @friend }
         else
             render json: { error: 'failed to create friendship' }, status: :not_acceptable
         end
     end
 
-    def destroyWithIds
+    def destroyFriendWithIds
         Friendship.find_by(user_id: params[:user_id], friend_id: params[:friend_id]).destroy
     end
+end
